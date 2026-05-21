@@ -1,0 +1,70 @@
+package biblioteca;
+
+import java.io.*;
+import java.util.ArrayList;
+
+import javax.security.auth.login.LoginException;
+
+public class Autenticacion {
+	private static final String FILE_NAME = "usuarios_sistema.dat";
+	private ArrayList<UsuarioLogin> listaUsuarios;
+	
+	public Autenticacion() {
+		this.listaUsuarios = new ArrayList<>();
+		cargarUsuarios();
+		//Si el archivo esta vacio, se crea un administrador por defecto
+		if (listaUsuarios.isEmpty()) {
+			crearUsuarioInicial(); 	
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void cargarUsuarios() {
+		File file = new File(FILE_NAME);
+		if (!file.exists()) {
+			return;
+		}
+		try(ObjectInputStream a = new ObjectInputStream (new FileInputStream (file))){
+			listaUsuarios = (ArrayList<UsuarioLogin>) a.readObject();
+		}catch (FileNotFoundException e) {
+			System.err.println("Archivo no encontrado, se creará automáticamente");
+		}catch (IOException | ClassNotFoundException e) {
+			System.err.println("Error al cargar los usuarios del sistema: " + e.getMessage());
+		}
+	}
+	
+	private void guardarUsuarios() {
+		try (ObjectOutputStream b = new ObjectOutputStream(new FileOutputStream (FILE_NAME))){
+			b.writeObject(listaUsuarios);
+		}catch (IOException e) {
+			System.err.println("Error al guardar los usuarios: " + e.getMessage());
+		}
+	}
+	
+	private void crearUsuarioInicial () {
+		listaUsuarios.add(new UsuarioLogin ("administrador", "3412"));
+		guardarUsuarios();
+	}
+	
+	public void registrarUsuarios(String username, String password) {
+		listaUsuarios.add(new UsuarioLogin (username, password));
+		guardarUsuarios();
+	}
+	
+	public boolean login(String username, String password) throws LoginException{
+		if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+			throw new LoginException ("Porfavor, ingrese todos los datos al formulario y llene todos los campos");
+		}
+		
+		for (UsuarioLogin c: listaUsuarios) {
+			if (c.getUsername().equals(username)) {
+				if(c.getPassword().equals(password)) {
+					return true;
+				}else {
+					throw new LoginException ("Contraseña incorrecta para el usuario: " + username);
+				}
+			}
+		}
+		throw new LoginException ("El usuario '" + username + "' no se encuentra registrado");
+	}
+}
