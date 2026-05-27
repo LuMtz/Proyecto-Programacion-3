@@ -2,7 +2,7 @@ package biblioteca;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.temporal.ChronoUnit;
+import java.time.temporal.ChronoUnit;
 
 public class Prestamo implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -56,9 +56,10 @@ public class Prestamo implements Serializable{
 		this.estado = "Devuelto";
 	}
 	
-	public int calcularDiasRetraso (LocalDate fechaAtual) {
+	public int calcularDiasRetraso (LocalDate fechaActual) {
 		if (isActivo() && fechaActual.isAfter(fechaDevolucion)) {
-			return (int) java.time.temporal.ChronoUnit.DAYS.between(fechaDevolucion, fechaAtual);
+			//calcula automaticamente la diferencia exacta en dias 
+			return (int) ChronoUnit.DAYS.between(fechaDevolucion, fechaActual);
 		}
 		return 0;
 	}

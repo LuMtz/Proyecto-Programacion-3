@@ -9,10 +9,9 @@ public class Usuario extends Persona implements Serializable{
 	private String status;
 	private int prestamos;
 	
-	public Usuario (String matricula, String nombre, String carrera) {
+	public Usuario (String matricula, String nombre) {
 		super(nombre);
 		this.matricula= matricula;
-		this.carrera = carrera;
 		this.status = "Activo";
 		this.prestamos =0;
 	}

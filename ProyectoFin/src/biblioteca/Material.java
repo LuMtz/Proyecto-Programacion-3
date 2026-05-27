@@ -3,6 +3,8 @@ package biblioteca;
 import java.io.Serializable;
 
 public abstract class Material implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private String titulo;
 	private boolean disponible;
