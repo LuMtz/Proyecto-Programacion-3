@@ -27,7 +27,7 @@ public class mainGrafico extends JFrame {
 			public void run() {
 				try {
 					mainGrafico frame = new mainGrafico();
-					frame.setTitle("SISTEMA DE BIBLIOTECA");
+					frame.setTitle("Menu Principal");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,12 +41,13 @@ public class mainGrafico extends JFrame {
 	 */
 	public mainGrafico() {
 		setTitle("SISTEMA DE BIBLIOTECA");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 515, 572); //
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 812, 606);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(192, 192, 192));
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		//DISEÑO===========================================================================================================================
 		//buscar recurso dentro de la carpeta de biblioteca (d.png)
@@ -78,13 +79,13 @@ public class mainGrafico extends JFrame {
 		
 		// colocar la imagen en el JLabel
 		JLabel lblImagen = new JLabel(new ImageIcon(imagenEscalada));
-		lblImagen.setBounds(20, 20, 460, 108);
+		lblImagen.setBounds(24, 82, 711, 108);
 		contentPane.add(lblImagen);
 		
-		JLabel lblNewLabel = new JLabel("SISTEMA DE BIBLIOTECA");
-		lblNewLabel.setBounds(67, 140, 352, 47);
-		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 15));
-		lblNewLabel.setBackground(new Color(202, 208, 251));
+		JLabel lblNewLabel = new JLabel("MENU PRINCIPAL");
+		lblNewLabel.setBounds(150, 24, 464, 47);
+		lblNewLabel.setFont(new Font("Felix Titling", Font.BOLD, 20));
+		lblNewLabel.setBackground(new Color(255, 255, 255));
 		lblNewLabel.setOpaque(true);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setVerticalAlignment(SwingConstants.CENTER);
@@ -94,7 +95,8 @@ public class mainGrafico extends JFrame {
 		
 		//_____ACCIONES______
 		JButton JFRegisUs = new JButton("Registro Usuario");
-		JFRegisUs.setBounds(173, 198, 136, 22);
+		JFRegisUs.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		JFRegisUs.setBounds(280, 208, 185, 33);
 		JFRegisUs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrameRegUsuario segundaVentana = new JFrameRegUsuario();
@@ -106,6 +108,7 @@ public class mainGrafico extends JFrame {
 		
 		
 		JButton JFAgLib= new JButton("Agregar Libro");
+		JFAgLib.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		JFAgLib.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrameAgLib terceraVentana = new JFrameAgLib();
@@ -113,11 +116,12 @@ public class mainGrafico extends JFrame {
 				contentPane.setBackground(Color.WHITE);
 			}
 		});
-		JFAgLib.setBounds(47, 317, 131, 22);
+		JFAgLib.setBounds(86, 328, 185, 33);
 		contentPane.add(JFAgLib);
 		
 		
 		JButton JFAgRev = new JButton("Agregar Revista");
+		JFAgRev.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		JFAgRev.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrameAgRevista cuartaVentana = new JFrameAgRevista();
@@ -125,11 +129,12 @@ public class mainGrafico extends JFrame {
 				contentPane.setBackground(Color.WHITE);
 			}
 		});
-		JFAgRev.setBounds(47, 361, 131, 22);
+		JFAgRev.setBounds(86, 381, 185, 33);
 		contentPane.add(JFAgRev);
 		
 		
 		JButton JFPres = new JButton("Realizar Prestamos");
+		JFPres.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		JFPres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFramePrestamos quintaVentana = new JFramePrestamos();
@@ -137,11 +142,12 @@ public class mainGrafico extends JFrame {
 				contentPane.setBackground(Color.WHITE);
 			}
 		});
-		JFPres.setBounds(305, 317, 150, 22);
+		JFPres.setBounds(523, 325, 185, 38);
 		contentPane.add(JFPres);
 		
 		
 		JButton JFDevMat = new JButton("Devolver Material");
+		JFDevMat.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		JFDevMat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrameDevMaterial sextaVentana = new JFrameDevMaterial();
@@ -149,74 +155,59 @@ public class mainGrafico extends JFrame {
 				contentPane.setBackground(Color.WHITE);
 			}
 		});
-		JFDevMat.setBounds(305, 361, 150, 22);
+		JFDevMat.setBounds(523, 381, 185, 33);
 		contentPane.add(JFDevMat);
 		
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnSalir.setBounds(182, 482, 127, 22);
+		btnSalir.setBounds(326, 520, 127, 22);
 		contentPane.add(btnSalir);
 		
 		
 		JButton btnNewButton_5 = new JButton("Mostrar Reporte");
-		btnNewButton_5.setBounds(166, 441, 157, 22);
+		btnNewButton_5.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		btnNewButton_5.setBounds(306, 472, 157, 33);
 		contentPane.add(btnNewButton_5);
-		contentPane.setBackground(Color.WHITE);
-		
-		
-		
-		//DISEÑO===========================================================================================================================
-		JLabel lblNewLabel_1 = new JLabel("\r\n");
-		lblNewLabel_1.setBackground(Color.BLACK);
-		lblNewLabel_1.setBounds(0, 265, 501, 2);
-		lblNewLabel_1.setOpaque(true);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("\r\n");
-		lblNewLabel_1_1.setOpaque(true);
-		lblNewLabel_1_1.setBackground(Color.BLACK);
-		lblNewLabel_1_1.setBounds(0, 400, 501, 2);
-		contentPane.add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("\r\n");
-		lblNewLabel_2.setOpaque(true);
-		lblNewLabel_2.setBackground(Color.BLACK);
-		lblNewLabel_2.setBounds(241, 266, 5, 136);
-		
-		contentPane.add(lblNewLabel_2);
+		contentPane.setBackground(new Color(0, 0, 64));
 		
 		JLabel lblNewLabel_3 = new JLabel("REGISTROS");
-		lblNewLabel_3.setFont(new Font("Verdana", Font.ITALIC, 11));
+		lblNewLabel_3.setFont(new Font("Felix Titling", Font.BOLD, 11));
 		lblNewLabel_3.setOpaque(true);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setVerticalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setBackground(new Color(213, 213, 255));
-		lblNewLabel_3.setBounds(72, 284, 82, 22);
+		lblNewLabel_3.setBackground(new Color(255, 255, 255));
+		lblNewLabel_3.setBounds(133, 283, 82, 22);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("PRESTAMOS");
 		lblNewLabel_3_1.setVerticalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3_1.setOpaque(true);
 		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3_1.setFont(new Font("Verdana", Font.ITALIC, 11));
-		lblNewLabel_3_1.setBackground(new Color(213, 213, 255));
-		lblNewLabel_3_1.setBounds(337, 284, 82, 22);
+		lblNewLabel_3_1.setFont(new Font("Felix Titling", Font.BOLD, 11));
+		lblNewLabel_3_1.setBackground(new Color(255, 255, 255));
+		lblNewLabel_3_1.setBounds(562, 283, 90, 23);
 		contentPane.add(lblNewLabel_3_1);
 		
-		JLabel lblNewLabel_4 = new JLabel("NOTA:");
-		lblNewLabel_4.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(79, 234, 48, 14);
-		contentPane.add(lblNewLabel_4);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setOpaque(true);
+		lblNewLabel_1.setBounds(0, 252, 797, 5);
+		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_5 = new JLabel("Se necesita crear/tener un usuario para poder acceder a las funciones.");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel_5.setBounds(126, 231, 365, 23);
-		contentPane.add(lblNewLabel_5);
+		JLabel lblNewLabel_1_2 = new JLabel("");
+		lblNewLabel_1_2.setOpaque(true);
+		lblNewLabel_1_2.setBounds(0, 11, 797, 5);
+		contentPane.add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setOpaque(true);
+		lblNewLabel_1_1.setBounds(0, 441, 797, 5);
+		contentPane.add(lblNewLabel_1_1);
 		
 	}
 }
