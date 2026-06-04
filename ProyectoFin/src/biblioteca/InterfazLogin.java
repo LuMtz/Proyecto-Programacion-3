@@ -104,14 +104,16 @@ public class InterfazLogin extends JFrame {
 		btnCrearCuenta.setBackground(new Color(64, 128, 128));
 		btnCrearCuenta.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String usuarioInput = textUsuario.getText();
-				String passwordInput = new String (contrasena.getPassword());
+
+				//crear cuenta con datos ingresados 
+				String usuarioInput = textUsuario.getText();	//obtener el nombre del usuario
+				String passwordInput = new String (contrasena.getPassword());		//obtener la constraseña del usuario
 				
 				if (usuarioInput.trim().isEmpty() || passwordInput.trim().isEmpty()) {
-					JOptionPane.showMessageDialog(InterfazLogin.this, "Debes llenar ambos campos para registrarte", "Campos vacios", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(InterfazLogin.this, "Debes llenar ambos campos para registrarte", "Campos vacios", JOptionPane.WARNING_MESSAGE);		//validar que esten los campos con informacion
 				} else {
 				
-				sistemaAuth.registrarUsuarios(usuarioInput, passwordInput);
+				sistemaAuth.registrarUsuarios(usuarioInput, passwordInput);		//guardar los datos
 				
 				JOptionPane.showMessageDialog(InterfazLogin.this, "Usuario " + usuarioInput + " registrado con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 				
@@ -133,6 +135,7 @@ public class InterfazLogin extends JFrame {
 				String usuarioInpunt = textUsuario.getText();
 				String passwordInput= new String(contrasena.getPassword());
 				
+				//iniciar sesion con cuenta ya creada
 				try {
 					boolean exito = sistemaAuth.login(usuarioInpunt, passwordInput);
 					
@@ -146,7 +149,7 @@ public class InterfazLogin extends JFrame {
 						 */
 					}
 				} catch (LoginException error) {
-					JOptionPane.showMessageDialog(InterfazLogin.this, error.getMessage(), "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(InterfazLogin.this, error.getMessage(), "Error de autenticación", JOptionPane.ERROR_MESSAGE);		//excepcion para inicio de sesion incorrecto
 				}
 			}
 		});
