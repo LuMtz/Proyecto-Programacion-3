@@ -18,6 +18,7 @@ public class mainGrafico extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private SistemaBiblioteca sistema;
 
 	/**
 	 * Launch the application.
@@ -40,6 +41,7 @@ public class mainGrafico extends JFrame {
 	 * Create the frame.
 	 */
 	public mainGrafico() {
+		this.sistema = new SistemaBiblioteca();
 		setTitle("SISTEMA DE BIBLIOTECA");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 812, 606);
@@ -99,8 +101,8 @@ public class mainGrafico extends JFrame {
 		JFRegisUs.setBounds(280, 208, 197, 33);
 		JFRegisUs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterfazLogin main = new InterfazLogin();
-				main.setVisible(true);
+				JFrameUsuario usuario = new JFrameUsuario();
+				usuario.setVisible(true);
 				dispose();
 				
 			}
@@ -138,7 +140,7 @@ public class mainGrafico extends JFrame {
 		JFPres.setFont(new Font("Felix Titling", Font.BOLD, 12));
 		JFPres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFramePrestamos quintaVentana = new JFramePrestamos();
+				JFramePrestamos quintaVentana = new JFramePrestamos(sistema);
 				quintaVentana.setVisible(true);
 				dispose();
 			}
@@ -160,14 +162,17 @@ public class mainGrafico extends JFrame {
 		contentPane.add(JFDevMat);
 		
 		
-		JButton btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("Cerrar Sesion");
 		btnSalir.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				InterfazLogin login = new InterfazLogin();
+				login.setVisible(true);
+				dispose();
+				//System.exit(0);
 			}
 		});
-		btnSalir.setBounds(319, 519, 127, 22);
+		btnSalir.setBounds(300, 522, 166, 22);
 		contentPane.add(btnSalir);
 		
 		
@@ -197,7 +202,7 @@ public class mainGrafico extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setOpaque(true);
-		lblNewLabel_1.setBounds(0, 252, 797, 5);
+		lblNewLabel_1.setBounds(0, 267, 797, 5);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("");

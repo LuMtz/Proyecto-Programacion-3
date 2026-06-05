@@ -144,13 +144,14 @@ public class JFrameAgRevista extends JFrame {
 				//hacenos una validacion para evitar que se agregen campos vacios
 				if (id.trim().isEmpty() || titulo.trim().isEmpty() || edicionTexto.trim().isEmpty()) {
 					JOptionPane.showMessageDialog(null,"Asegurate de ingresar datos correctamente.","Error",JOptionPane.ERROR_MESSAGE);
+					return;
 				}else {
 					//utilizamos un else para hacer losiguiente en dado caso que los camposdellenado de informaciooon no esten vacios
 					int numEd = Integer.parseInt(edicionTexto);//se cambia el fomato leido en edicionTexto
 					Revista revista = new Revista(id, titulo, numEd);
 					sistema.registrarMAterial(revista);
 				
-					JOptionPane.showMessageDialog(null, "Revista agregada correctamente."); //Mensaje que indica que se agrego correctamente el libro
+					JOptionPane.showMessageDialog(null, "Revista agregada correctamente."); //Mensaje que indica que se agrego correctamente la revista
 				
 					textId.setText("");
 					textTitulo.setText("");

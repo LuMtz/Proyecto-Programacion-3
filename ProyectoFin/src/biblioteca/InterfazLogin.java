@@ -33,6 +33,7 @@ public class InterfazLogin extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
+	private JButton btnSalir;
 	
 	/**
 	* Launch the application.
@@ -128,7 +129,7 @@ public class InterfazLogin extends JFrame {
 			}
 		}
 	});
-		btnCrearCuenta.setBounds(151, 440, 175, 46);
+		btnCrearCuenta.setBounds(151, 423, 175, 46);
 		contentPane.add(btnCrearCuenta);
 		
 		
@@ -166,7 +167,7 @@ public class InterfazLogin extends JFrame {
 		});
 		btnIniciarSesion.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		btnIniciarSesion.setForeground(new Color(0,0,64));
-		btnIniciarSesion.setBounds(471, 440, 175, 46);
+		btnIniciarSesion.setBounds(491, 423, 175, 46);
 		btnIniciarSesion.setOpaque(true);
 		contentPane.add(btnIniciarSesion);
 		
@@ -195,6 +196,19 @@ public class InterfazLogin extends JFrame {
 		lblNewLabel_4.setFont(new Font("Felix Titling", Font.BOLD | Font.ITALIC, 11));
 		lblNewLabel_4.setBounds(180, 155, 48, 14);
 		contentPane.add(lblNewLabel_4);
+		
+		btnSalir = new JButton("Salir\r\n");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnSalir.setOpaque(true);
+		btnSalir.setForeground(new Color(0, 0, 64));
+		btnSalir.setFont(new Font("Felix Titling", Font.BOLD, 15));
+		btnSalir.setBackground(Color.WHITE);
+		btnSalir.setBounds(333, 503, 150, 38);
+		contentPane.add(btnSalir);
 	}
 } 
 
