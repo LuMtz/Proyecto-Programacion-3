@@ -79,11 +79,11 @@ public class mainGrafico extends JFrame {
 		
 		// colocar la imagen en el JLabel
 		JLabel lblImagen = new JLabel(new ImageIcon(imagenEscalada));
-		lblImagen.setBounds(24, 82, 711, 108);
+		lblImagen.setBounds(35, 89, 711, 108);
 		contentPane.add(lblImagen);
 		
 		JLabel lblNewLabel = new JLabel("MENU PRINCIPAL");
-		lblNewLabel.setBounds(150, 24, 464, 47);
+		lblNewLabel.setBounds(156, 27, 464, 47);
 		lblNewLabel.setFont(new Font("Felix Titling", Font.BOLD, 20));
 		lblNewLabel.setBackground(new Color(255, 255, 255));
 		lblNewLabel.setOpaque(true);
@@ -95,25 +95,25 @@ public class mainGrafico extends JFrame {
 		
 		//_____ACCIONES______
 		JButton JFRegisUs = new JButton("Registro Usuario");
-		JFRegisUs.setFont(new Font("Rockwell", Font.PLAIN, 15));
-		JFRegisUs.setBounds(280, 208, 185, 33);
+		JFRegisUs.setFont(new Font("Felix Titling", Font.BOLD, 15));
+		JFRegisUs.setBounds(280, 208, 197, 33);
 		JFRegisUs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrameRegUsuario segundaVentana = new JFrameRegUsuario();
-				segundaVentana.setVisible(true);
-				contentPane.setBackground(Color.WHITE);
+				InterfazLogin mainGrafico = new InterfazLogin();
+				mainGrafico.setVisible(true);
+				
 			}
 		});
 		contentPane.add(JFRegisUs);
 		
 		
 		JButton JFAgLib= new JButton("Agregar Libro");
-		JFAgLib.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		JFAgLib.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		JFAgLib.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrameAgLib terceraVentana = new JFrameAgLib();
 				terceraVentana.setVisible(true);
-				contentPane.setBackground(Color.WHITE);
+				
 			}
 		});
 		JFAgLib.setBounds(86, 328, 185, 33);
@@ -121,12 +121,12 @@ public class mainGrafico extends JFrame {
 		
 		
 		JButton JFAgRev = new JButton("Agregar Revista");
-		JFAgRev.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		JFAgRev.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		JFAgRev.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrameAgRevista cuartaVentana = new JFrameAgRevista();
 				cuartaVentana.setVisible(true);
-				contentPane.setBackground(Color.WHITE);
+				
 			}
 		});
 		JFAgRev.setBounds(86, 381, 185, 33);
@@ -134,12 +134,12 @@ public class mainGrafico extends JFrame {
 		
 		
 		JButton JFPres = new JButton("Realizar Prestamos");
-		JFPres.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		JFPres.setFont(new Font("Felix Titling", Font.BOLD, 12));
 		JFPres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFramePrestamos quintaVentana = new JFramePrestamos();
 				quintaVentana.setVisible(true);
-				contentPane.setBackground(Color.WHITE);
+				
 			}
 		});
 		JFPres.setBounds(523, 325, 185, 38);
@@ -147,12 +147,12 @@ public class mainGrafico extends JFrame {
 		
 		
 		JButton JFDevMat = new JButton("Devolver Material");
-		JFDevMat.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		JFDevMat.setFont(new Font("Felix Titling", Font.BOLD, 13));
 		JFDevMat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrameDevMaterial sextaVentana = new JFrameDevMaterial();
 				sextaVentana.setVisible(true);
-				contentPane.setBackground(Color.WHITE);
+				
 			}
 		});
 		JFDevMat.setBounds(523, 381, 185, 33);
@@ -160,19 +160,19 @@ public class mainGrafico extends JFrame {
 		
 		
 		JButton btnSalir = new JButton("Salir");
-		btnSalir.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		btnSalir.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnSalir.setBounds(326, 520, 127, 22);
+		btnSalir.setBounds(319, 519, 127, 22);
 		contentPane.add(btnSalir);
 		
 		
 		JButton btnNewButton_5 = new JButton("Mostrar Reporte");
-		btnNewButton_5.setFont(new Font("Rockwell", Font.PLAIN, 15));
-		btnNewButton_5.setBounds(306, 472, 157, 33);
+		btnNewButton_5.setFont(new Font("Felix Titling", Font.BOLD, 15));
+		btnNewButton_5.setBounds(280, 472, 197, 33);
 		contentPane.add(btnNewButton_5);
 		contentPane.setBackground(new Color(0, 0, 64));
 		
@@ -182,7 +182,7 @@ public class mainGrafico extends JFrame {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setVerticalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBackground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(133, 283, 82, 22);
+		lblNewLabel_3.setBounds(139, 283, 82, 22);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("PRESTAMOS");
@@ -191,7 +191,7 @@ public class mainGrafico extends JFrame {
 		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3_1.setFont(new Font("Felix Titling", Font.BOLD, 11));
 		lblNewLabel_3_1.setBackground(new Color(255, 255, 255));
-		lblNewLabel_3_1.setBounds(562, 283, 90, 23);
+		lblNewLabel_3_1.setBounds(568, 283, 90, 23);
 		contentPane.add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("");

@@ -84,7 +84,7 @@ public class InterfazLogin extends JFrame {
 		contentPane.add(lblNewLabel);
 		textUsuario = new JTextField();
 		textUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textUsuario.setBounds(336, 212, 204, 38);
+		textUsuario.setBounds(336, 210, 204, 38);
 		contentPane.add(textUsuario);
 		textUsuario.setColumns(10);
 		
@@ -102,24 +102,27 @@ public class InterfazLogin extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		btnCrearCuenta = new JButton("Crear cuenta");
-		btnCrearCuenta.setFont(new Font("Rockwell", Font.PLAIN, 20));
+		btnCrearCuenta.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		btnCrearCuenta.setForeground(new Color(0,0,64));
 		btnCrearCuenta.setBackground(new Color(255, 255, 255));
 		btnCrearCuenta.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				String usuarioInput = textUsuario.getText();
-				String passwordInput = new String (contrasena.getPassword());
+				
+				//crear cuenta con datos ingresados
+				String usuarioInput = textUsuario.getText(); 											//obtener el nombre del usuario
+				String passwordInput = new String (contrasena.getPassword());							//obtener la contraseña del usuario
 				
 				if (usuarioInput.trim().isEmpty() || passwordInput.trim().isEmpty()) {
 					JOptionPane.showMessageDialog(InterfazLogin.this, "Debes llenar ambos campos para registrarte", "Campos vacios", JOptionPane.WARNING_MESSAGE);
+																										//validar que los campos tengan informacion
 				} else {
 				
-				sistemaAuth.registrarUsuarios(usuarioInput, passwordInput);
+				sistemaAuth.registrarUsuarios(usuarioInput, passwordInput);								//guardamos la contraseña
 				
 				JOptionPane.showMessageDialog(InterfazLogin.this, "Usuario " + usuarioInput + " registrado con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 				
-				textUsuario.setText("");
-				contrasena.setText("");
+				textUsuario.setText("");																//limpiar la zona de escritura (Usuario)
+				contrasena.setText("");																	//limpiar la zona de escritura (Contraseña)
 				mainGrafico mainVentana = new mainGrafico();
 				mainVentana.setVisible(true);
 			}
@@ -127,6 +130,9 @@ public class InterfazLogin extends JFrame {
 	});
 		btnCrearCuenta.setBounds(151, 440, 175, 46);
 		contentPane.add(btnCrearCuenta);
+		
+		
+		
 		
 		btnIniciarSesion = new JButton("Iniciar Sesion");
 		btnIniciarSesion.setBackground(new Color(255, 255, 255));
@@ -149,19 +155,24 @@ public class InterfazLogin extends JFrame {
 						 * menu.setVisible(true);
 						 * dispose();		para cerrar la ventana del login
 						 */
+						mainGrafico mainVentana = new mainGrafico();
+						mainVentana.setVisible(true);
 					}
 				} catch (LoginException error) {
 					JOptionPane.showMessageDialog(InterfazLogin.this, error.getMessage(), "Error de autenticación", JOptionPane.ERROR_MESSAGE);
 				}
-				mainGrafico mainVentana = new mainGrafico();
-				mainVentana.setVisible(true);
+				
 			}
 		});
-		btnIniciarSesion.setFont(new Font("Rockwell", Font.PLAIN, 20));
+		btnIniciarSesion.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		btnIniciarSesion.setForeground(new Color(0,0,64));
 		btnIniciarSesion.setBounds(471, 440, 175, 46);
 		btnIniciarSesion.setOpaque(true);
 		contentPane.add(btnIniciarSesion);
+		
+		
+		
+		//=====================================DISEÑO======================================================================================================
 		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(0, 107, 797, 5);

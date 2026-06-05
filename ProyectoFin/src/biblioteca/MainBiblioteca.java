@@ -10,7 +10,7 @@ public class MainBiblioteca {
 	private static Autenticacion autenticacion;
 	private static BackUpAutomatico backup;
 	private static Thread procesoSecundario;
-	
+	/*
 	/*Controlamos el ciclio de incio de sesión. Si las credenciales no son correctas, no permite avanzar*/
 	private static void ejecutarLogin() {
 		boolean acceso = false;
@@ -107,17 +107,17 @@ public class MainBiblioteca {
 		System.out.println("Usuario registrado y respaldado.");
 	}
 	
-	private static void menuAgregarLibro() {
-		System.out.println("ID / Codigo: ");
-		String id = scanner.nextLine();		
-		System.out.println("Titulo: ");
+	private static void menuAgregarLibro() {		//ocupamos leer:
+		System.out.println("ID / Codigo: ");		//id/codigo
+		String id = scanner.nextLine();			
+		System.out.println("Titulo: ");				//Titulo
 		String titulo = scanner.nextLine();
-		System.out.println("Autor: ");
-		String aut = scanner.nextLine();
+		System.out.println("Autor: ");				//Autor
+		String aut = scanner.nextLine();	
 		
-		Libro libro = new Libro (id, titulo, aut);
-		sistema.registrarMAterial(libro);
-		System.out.println("Libro agregado exitosamente");
+		Libro libro = new Libro (id, titulo, aut);	//hacer un objeto de tipo Libro y agregar los datos leidos
+		sistema.registrarMAterial(libro);			//mandamos a la clase sistema (en el metodo de registarMAterial) el objeto de libro
+		System.out.println("Libro agregado exitosamente");		//mensaje de confirmacion (se agrego correctamente el libro)
 	}
 	
 	private static void menuAgregarRevista() {
@@ -195,7 +195,7 @@ public class MainBiblioteca {
 		autenticacion = new Autenticacion();
 		
 		System.out.println("SISTEMA DE GESTION DE BIBLIOTECA");
-		ejecutarLogin();
+		//ejecutarLogin();
 		//Fase donde se inicializa la concurrencia
 		//Se inicializa el hilo para que haga un respaldo cada 60 segundos
 		backup = new BackUpAutomatico (sistema, 60);
