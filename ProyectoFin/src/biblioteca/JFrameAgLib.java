@@ -70,7 +70,7 @@ public class JFrameAgLib extends JFrame {
 		lblNewLabel_1_2.setBounds(0, 10, 797, 5);
 		getContentPane().add(lblNewLabel_1_2);
 		
-		JLabel lblZonaParaagregarLibros = new JLabel("ZONA PARA AGREGAR LIBROS");
+		JLabel lblZonaParaagregarLibros = new JLabel("REGISTRO DE LIBROS");
 		lblZonaParaagregarLibros.setVerticalAlignment(SwingConstants.CENTER);
 		lblZonaParaagregarLibros.setOpaque(true);
 		lblZonaParaagregarLibros.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,13 +105,6 @@ public class JFrameAgLib extends JFrame {
 		textTitulo.setColumns(10);									//Mostrare como quedo y seguimoscon la parte de logica
 		textTitulo.setBounds(391, 234, 204, 38);
 		getContentPane().add(textTitulo);
-		
-		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAutor.setForeground(Color.WHITE);
-		lblAutor.setFont(new Font("Felix Titling", Font.BOLD, 20));
-		lblAutor.setBounds(239, 310, 142, 38);
-		getContentPane().add(lblAutor);
 		
 		textAutor = new JTextField();
 		textAutor.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -172,6 +165,13 @@ public class JFrameAgLib extends JFrame {
 		btnAgregar.setBackground(Color.WHITE);
 		btnAgregar.setBounds(419, 377, 148, 46);
 		getContentPane().add(btnAgregar);
+		
+		JLabel lblAutor = new JLabel("Autor:");
+		lblAutor.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAutor.setForeground(Color.WHITE);
+		lblAutor.setFont(new Font("Felix Titling", Font.BOLD, 20));
+		lblAutor.setBounds(239, 312, 142, 38);
+		getContentPane().add(lblAutor);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 812, 606); //
 		contentPane = new JPanel();

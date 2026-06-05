@@ -128,7 +128,6 @@ public class MainBiblioteca {
 		String titulo = scanner.nextLine();
 		System.out.println("Numero de edicion: ");
 		int numEd = Integer.parseInt(scanner.nextLine());
-		
 		Revista revista = new Revista (id, titulo, numEd);
 		sistema.registrarMAterial(revista);
 		System.out.println("Revista agregada exitosamente!.");

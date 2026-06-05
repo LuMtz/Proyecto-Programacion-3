@@ -99,8 +99,9 @@ public class mainGrafico extends JFrame {
 		JFRegisUs.setBounds(280, 208, 197, 33);
 		JFRegisUs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterfazLogin mainGrafico = new InterfazLogin();
-				mainGrafico.setVisible(true);
+				InterfazLogin main = new InterfazLogin();
+				main.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -113,7 +114,7 @@ public class mainGrafico extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JFrameAgLib terceraVentana = new JFrameAgLib();
 				terceraVentana.setVisible(true);
-				
+				dispose();
 			}
 		});
 		JFAgLib.setBounds(86, 328, 185, 33);
@@ -126,7 +127,7 @@ public class mainGrafico extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JFrameAgRevista cuartaVentana = new JFrameAgRevista();
 				cuartaVentana.setVisible(true);
-				
+				dispose();
 			}
 		});
 		JFAgRev.setBounds(86, 381, 185, 33);
@@ -139,7 +140,7 @@ public class mainGrafico extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JFramePrestamos quintaVentana = new JFramePrestamos();
 				quintaVentana.setVisible(true);
-				
+				dispose();
 			}
 		});
 		JFPres.setBounds(523, 325, 185, 38);
@@ -152,7 +153,7 @@ public class mainGrafico extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JFrameDevMaterial sextaVentana = new JFrameDevMaterial();
 				sextaVentana.setVisible(true);
-				
+				dispose();
 			}
 		});
 		JFDevMat.setBounds(523, 381, 185, 33);
