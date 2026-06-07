@@ -11,14 +11,19 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.net.URL;
+import java.awt.event.ActionEvent;
 
 public class JFrameReporte extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
 	//atributo de sistemaBibliotecario
 	private SistemaBiblioteca sistema;
+	private String matricula;
 
 	/**
 	 * Launch the application.
@@ -28,7 +33,8 @@ public class JFrameReporte extends JFrame {
 			public void run() {
 				try {
 					SistemaBiblioteca sistemaT = new SistemaBiblioteca();		//creamos la instancia de forma local
-					JFrameReporte frame = new JFrameReporte(sistemaT);
+					JFrameReporte frame = new JFrameReporte(sistemaT,"");
+					frame.setTitle("Reporte de Movimientos");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,12 +42,30 @@ public class JFrameReporte extends JFrame {
 			}
 		});
 	}
+	
+	private void cambiarIcono() {
+		//me asuste,crei q iba a perder todo el progreso
+		//se iba a apagar por no tener pila
+		try {
+			URL urlIcono = getClass().getResource("chilly.jpg");
+			if (urlIcono != null) {
+				ImageIcon miIcono = new ImageIcon(urlIcono);
+				setIconImage(miIcono.getImage());
+			}else {
+				System.out.println("Error: No se encontro la imagen");
+			}
+		}catch(Exception e) {
+			System.out.println("Ocurri un error alcargar la imagen");
+		}
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public JFrameReporte(SistemaBiblioteca sistemaExistente) {
+	public JFrameReporte(SistemaBiblioteca sistemaExistente, String matricula) {
 		this.sistema= sistemaExistente;
+		this.matricula = matricula;
+		cambiarIcono();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //dispose para que no se cierre el menu
 		setBounds(100, 100, 830, 560);
@@ -52,13 +76,15 @@ public class JFrameReporte extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblReporteGeneral = new JLabel("Reporte General");
-		lblReporteGeneral.setForeground(Color.WHITE);
+		lblReporteGeneral.setForeground(new Color(0, 0, 64));
 		lblReporteGeneral.setFont(new Font("Felix Titling", Font.PLAIN, 40));
-		lblReporteGeneral.setBounds(212, 10, 392, 95);
+		lblReporteGeneral.setBounds(221, 29, 392, 54);
+		lblReporteGeneral.setOpaque(true);
 		contentPane.add(lblReporteGeneral);
 		
 		JTextArea textAreaReporte = new JTextArea();
-		textAreaReporte.setFont(new Font("Arial", Font.PLAIN, 24));
+		textAreaReporte.setBounds(1, 1, 553, 322);
+		textAreaReporte.setFont(new Font("Arial", Font.PLAIN, 16));
 		contentPane.add(textAreaReporte);
 		textAreaReporte.setEditable(false); 	//para que el usuario no modifique el reporte
 		
@@ -70,6 +96,38 @@ public class JFrameReporte extends JFrame {
 		scrollPaneReporte.setViewportView(textAreaReporte);
 		
 		generarReporte(textAreaReporte);
+		
+		JButton btnNewButton = new JButton("Regresar A Menu Principal");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainGrafico mainVentana = new mainGrafico(matricula);
+				mainVentana.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Felix Titling", Font.BOLD, 15));
+		btnNewButton.setBounds(281, 471, 302, 44);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_1_2_1_1 = new JLabel("");
+		lblNewLabel_1_2_1_1.setOpaque(true);
+		lblNewLabel_1_2_1_1.setBounds(0, 11, 816, 7);
+		contentPane.add(lblNewLabel_1_2_1_1);
+		
+		JLabel lblNewLabel_1_2_1_1_1 = new JLabel("");
+		lblNewLabel_1_2_1_1_1.setOpaque(true);
+		lblNewLabel_1_2_1_1_1.setBounds(0, 92, 816, 7);
+		contentPane.add(lblNewLabel_1_2_1_1_1);
+		
+		JLabel lblNewLabel_1_2_1_1_1_1 = new JLabel("");
+		lblNewLabel_1_2_1_1_1_1.setOpaque(true);
+		lblNewLabel_1_2_1_1_1_1.setBounds(10, 92, 6, 462);
+		contentPane.add(lblNewLabel_1_2_1_1_1_1);
+		
+		JLabel lblNewLabel_1_2_1_1_1_2 = new JLabel("");
+		lblNewLabel_1_2_1_1_1_2.setOpaque(true);
+		lblNewLabel_1_2_1_1_1_2.setBounds(800, 92, 6, 462);
+		contentPane.add(lblNewLabel_1_2_1_1_1_2);
 	}
 
 	private void generarReporte(JTextArea textAreaReporte) {

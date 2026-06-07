@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 
 public class mainGrafico extends JFrame {
@@ -27,7 +28,7 @@ public class mainGrafico extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainGrafico frame = new mainGrafico();
+					mainGrafico frame = new mainGrafico("SIN SESION");
 					frame.setTitle("Menu Principal");
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -36,12 +37,27 @@ public class mainGrafico extends JFrame {
 			}
 		});
 	}
+	
+	private void cambiarIcono() {
+		try {
+			URL urlIcono = getClass().getResource("chilly.jpg");
+			if (urlIcono != null) {
+				ImageIcon miIcono = new ImageIcon(urlIcono);
+				setIconImage(miIcono.getImage());
+			}else {
+				System.out.println("Error: No se encontro la imagen");
+			}
+		}catch(Exception e) {
+			System.out.println("Ocurri un error alcargar la imagen");
+		}
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public mainGrafico() {
+	public mainGrafico(String matricula) {
 		this.sistema = new SistemaBiblioteca();
+		cambiarIcono();
 		setTitle("SISTEMA DE BIBLIOTECA");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 812, 606);
@@ -56,7 +72,7 @@ public class mainGrafico extends JFrame {
 		java.net.URL url = getClass().getResource("/biblioteca/d.png");
 		if(url == null) {
 		    System.out.println("NO SE ENCONTRO LA IMAGEN");
-		    return;
+		   // return;
 		}
 
 		ImageIcon iconoOriginal = new ImageIcon(url);
@@ -81,7 +97,7 @@ public class mainGrafico extends JFrame {
 		
 		// colocar la imagen en el JLabel
 		JLabel lblImagen = new JLabel(new ImageIcon(imagenEscalada));
-		lblImagen.setBounds(35, 89, 711, 108);
+		lblImagen.setBounds(96, 85, 587, 108);
 		contentPane.add(lblImagen);
 		
 		JLabel lblNewLabel = new JLabel("MENU PRINCIPAL");
@@ -92,34 +108,19 @@ public class mainGrafico extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setVerticalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel);
-		//=================================================================DISEÑO===========================================================================
-		
-		
-		//_____ACCIONES______
-		JButton JFRegisUs = new JButton("Registro Usuario");
-		JFRegisUs.setFont(new Font("Felix Titling", Font.BOLD, 15));
-		JFRegisUs.setBounds(280, 208, 197, 33);
-		JFRegisUs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrameUsuario usuario = new JFrameUsuario();
-				usuario.setVisible(true);
-				dispose();
-				
-			}
-		});
-		contentPane.add(JFRegisUs);
 		
 		
 		JButton JFAgLib= new JButton("Agregar Libro");
 		JFAgLib.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		JFAgLib.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrameAgLib terceraVentana = new JFrameAgLib();
+				//ahora,en todos los enlaces a otras ventanas tenemos que mandar la matricula desde el mainGrafico
+				JFrameAgLib terceraVentana = new JFrameAgLib(matricula);
 				terceraVentana.setVisible(true);
 				dispose();
 			}
 		});
-		JFAgLib.setBounds(86, 328, 185, 33);
+		JFAgLib.setBounds(86, 311, 185, 33);
 		contentPane.add(JFAgLib);
 		
 		
@@ -127,7 +128,7 @@ public class mainGrafico extends JFrame {
 		JFAgRev.setFont(new Font("Felix Titling", Font.BOLD, 15));
 		JFAgRev.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrameAgRevista cuartaVentana = new JFrameAgRevista();
+				JFrameAgRevista cuartaVentana = new JFrameAgRevista(matricula);
 				cuartaVentana.setVisible(true);
 				dispose();
 			}
@@ -140,12 +141,12 @@ public class mainGrafico extends JFrame {
 		JFPres.setFont(new Font("Felix Titling", Font.BOLD, 12));
 		JFPres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFramePrestamos quintaVentana = new JFramePrestamos(sistema);
+				JFramePrestamos quintaVentana = new JFramePrestamos(sistema,matricula);
 				quintaVentana.setVisible(true);
 				dispose();
 			}
 		});
-		JFPres.setBounds(523, 325, 185, 38);
+		JFPres.setBounds(523, 308, 185, 38);
 		contentPane.add(JFPres);
 		
 		
@@ -153,7 +154,7 @@ public class mainGrafico extends JFrame {
 		JFDevMat.setFont(new Font("Felix Titling", Font.BOLD, 13));
 		JFDevMat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrameDevMaterial sextaVentana = new JFrameDevMaterial();
+				JFrameDevoluciones sextaVentana = new JFrameDevoluciones(sistema,matricula);
 				sextaVentana.setVisible(true);
 				dispose();
 			}
@@ -172,13 +173,20 @@ public class mainGrafico extends JFrame {
 				//System.exit(0);
 			}
 		});
-		btnSalir.setBounds(300, 522, 166, 22);
+		btnSalir.setBounds(308, 523, 166, 22);
 		contentPane.add(btnSalir);
 		
 		
 		JButton btnNewButton_5 = new JButton("Mostrar Reporte");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrameReporte reporte = new JFrameReporte(sistema,matricula);
+				reporte.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewButton_5.setFont(new Font("Felix Titling", Font.BOLD, 15));
-		btnNewButton_5.setBounds(280, 472, 197, 33);
+		btnNewButton_5.setBounds(294, 472, 197, 33);
 		contentPane.add(btnNewButton_5);
 		contentPane.setBackground(new Color(0, 0, 64));
 		
@@ -188,7 +196,7 @@ public class mainGrafico extends JFrame {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setVerticalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBackground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(139, 283, 82, 22);
+		lblNewLabel_3.setBounds(139, 269, 82, 22);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("PRESTAMOS");
@@ -197,12 +205,12 @@ public class mainGrafico extends JFrame {
 		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3_1.setFont(new Font("Felix Titling", Font.BOLD, 11));
 		lblNewLabel_3_1.setBackground(new Color(255, 255, 255));
-		lblNewLabel_3_1.setBounds(568, 283, 90, 23);
+		lblNewLabel_3_1.setBounds(565, 269, 90, 23);
 		contentPane.add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setOpaque(true);
-		lblNewLabel_1.setBounds(0, 267, 797, 5);
+		lblNewLabel_1.setBounds(0, 233, 797, 5);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("");
@@ -215,5 +223,25 @@ public class mainGrafico extends JFrame {
 		lblNewLabel_1_1.setBounds(0, 441, 797, 5);
 		contentPane.add(lblNewLabel_1_1);
 		
+		JLabel lblNewLabel_3_2 = new JLabel("matricula de Usario:");
+		lblNewLabel_3_2.setVerticalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_2.setOpaque(true);
+		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_2.setFont(new Font("Felix Titling", Font.BOLD, 11));
+		lblNewLabel_3_2.setBackground(Color.WHITE);
+		lblNewLabel_3_2.setBounds(630, 96, 147, 36);
+		contentPane.add(lblNewLabel_3_2);
+		
+		JLabel lblNewLabel_3_2_1 = new JLabel("");
+		lblNewLabel_3_2_1.setText(matricula);//en el label seescribe la matricula
+		lblNewLabel_3_2_1.setVerticalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_2_1.setOpaque(true);
+		lblNewLabel_3_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_2_1.setFont(new Font("Felix Titling", Font.BOLD, 11));
+		lblNewLabel_3_2_1.setBackground(Color.WHITE);
+		lblNewLabel_3_2_1.setBounds(650, 143, 108, 33);
+		contentPane.add(lblNewLabel_3_2_1);
+		
 	}
 }
+

@@ -9,8 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -21,6 +23,7 @@ public class JFramePrestamos extends JFrame {
 	private JTextField textMatricula;
 	private JTextField textidMaterial;
 	private SistemaBiblioteca sistema;
+	private String matricula;
 
 	/**
 	 * Launch the application.
@@ -31,10 +34,8 @@ public class JFramePrestamos extends JFrame {
 	            try {
 	                
 	                SistemaBiblioteca sistemaPrincipal = new SistemaBiblioteca();
-	                
-	                
-	                JFramePrestamos frame = new JFramePrestamos(sistemaPrincipal);
-	                
+	                JFramePrestamos frame = new JFramePrestamos(sistemaPrincipal,"");
+	                frame.setTitle("Prestamos");
 	                frame.setVisible(true);
 	            } catch (Exception e) {
 	                e.printStackTrace();
@@ -42,12 +43,33 @@ public class JFramePrestamos extends JFrame {
 	        }
 	    });
 	}
+	private void cambiarIcono() {
+		//me asuste,crei q iba a perder todo el progreso
+		//se iba a apagar por no tener pila
+		try {
+			URL urlIcono = getClass().getResource("chilly.jpg");
+			if (urlIcono != null) {
+				ImageIcon miIcono = new ImageIcon(urlIcono);
+				setIconImage(miIcono.getImage());
+			}else {
+				System.out.println("Error: No se encontro la imagen");
+			}
+		}catch(Exception e) {
+			System.out.println("Ocurri un error alcargar la imagen");
+		}
+	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public JFramePrestamos(SistemaBiblioteca sistemaPrincipal) {
+	//pasamos matricula como parametro, para que despues regresar de cualquier ventana a la principal se vea la matricula
+	//Hacemo lo mismo en todasls demas ventanas
+	public JFramePrestamos(SistemaBiblioteca sistemaPrincipal, String matricula) {
 		this.sistema = sistemaPrincipal;
+		this.matricula = matricula;
+		cambiarIcono();
+		
 		getContentPane().setBackground(new Color(0,0,64));
 		getContentPane().setLayout(null);
 		
@@ -88,7 +110,7 @@ public class JFramePrestamos extends JFrame {
 		JButton btnNewButton = new JButton("Regresar A Menu Principal");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainGrafico mainVentana = new mainGrafico();
+				mainGrafico mainVentana = new mainGrafico(matricula);
 				mainVentana.setVisible(true);
 				dispose();
 			}
@@ -110,7 +132,7 @@ public class JFramePrestamos extends JFrame {
 		textMatricula.setBounds(442, 171, 204, 38);
 		getContentPane().add(textMatricula);
 		
-		JLabel lblIdDelMaterial = new JLabel("ID del material solicitado:");
+		JLabel lblIdDelMaterial = new JLabel("MATERIAL SOLICITADO (ID):");
 		lblIdDelMaterial.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblIdDelMaterial.setForeground(Color.WHITE);
 		lblIdDelMaterial.setFont(new Font("Felix Titling", Font.BOLD, 20));

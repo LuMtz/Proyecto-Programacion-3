@@ -20,6 +20,12 @@ public class SistemaBiblioteca {
 		
 		cargarDatosBinarios();
 	}
+	//hacemos un metodo publico para poder guardar  los datos desde fuera
+	public void guardarCambios() {
+		guardarDatosBinarios();//llamamos al metodo privado que ya existe
+	}
+	
+	
 	
 	public void registrarUsuario(Usuario nuevoUsuario) {
 		usuarios.add(nuevoUsuario);

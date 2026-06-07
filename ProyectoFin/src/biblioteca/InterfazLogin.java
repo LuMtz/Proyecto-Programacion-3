@@ -14,7 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.security.auth.login.LoginException;
 import javax.swing.JButton;
-
+import javax.swing.ImageIcon;
+import java.net.URL;
 
 
 
@@ -34,6 +35,7 @@ public class InterfazLogin extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JButton btnSalir;
+	private JTextField textNombre;
 	
 	/**
 	* Launch the application.
@@ -57,12 +59,28 @@ public class InterfazLogin extends JFrame {
 	/**
 	* Create the frame.
 	*/
+	private void cambiarIcono() {
+		//me asuste,crei q iba a perder todo el progreso
+		//se iba a apagar por no tener pila
+		try {
+			URL urlIcono = getClass().getResource("chilly.jpg");
+			if (urlIcono != null) {
+				ImageIcon miIcono = new ImageIcon(urlIcono);
+				setIconImage(miIcono.getImage());
+			}else {
+				System.out.println("Error: No se encontro la imagen");
+			}
+		}catch(Exception e) {
+			System.out.println("Ocurri un error alcargar la imagen");
+		}
+	}
+	
 	
 	public InterfazLogin() {
 		
 		sistemaAuth= new Autenticacion();
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cambiarIcono();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 811, 606);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 64));
@@ -85,9 +103,15 @@ public class InterfazLogin extends JFrame {
 		contentPane.add(lblNewLabel);
 		textUsuario = new JTextField();
 		textUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textUsuario.setBounds(336, 210, 204, 38);
+		textUsuario.setBounds(336, 254, 204, 38);
 		contentPane.add(textUsuario);
 		textUsuario.setColumns(10);
+		
+		textNombre = new JTextField();
+		textNombre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textNombre.setColumns(10);
+		textNombre.setBounds(336, 182, 204, 38);
+		contentPane.add(textNombre);
 		
 		
 		JLabel lbContrasena = new JLabel("Contraseña:");
@@ -99,7 +123,7 @@ public class InterfazLogin extends JFrame {
 		lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setForeground(Color.WHITE);
 		lblUsuario.setFont(new Font("Felix Titling", Font.BOLD, 20));
-		lblUsuario.setBounds(226, 210, 100, 38);
+		lblUsuario.setBounds(226, 252, 100, 38);
 		contentPane.add(lblUsuario);
 		
 		btnCrearCuenta = new JButton("Crear cuenta");
@@ -112,20 +136,27 @@ public class InterfazLogin extends JFrame {
 				//crear cuenta con datos ingresados
 				String usuarioInput = textUsuario.getText(); 											//obtener el nombre del usuario
 				String passwordInput = new String (contrasena.getPassword());							//obtener la contraseña del usuario
+				String nombreInput = textNombre.getText();
 				
-				if (usuarioInput.trim().isEmpty() || passwordInput.trim().isEmpty()) {
+				if (usuarioInput.trim().isEmpty() || passwordInput.trim().isEmpty() || nombreInput.trim().isEmpty()) {
 					JOptionPane.showMessageDialog(InterfazLogin.this, "Debes llenar ambos campos para registrarte", "Campos vacios", JOptionPane.WARNING_MESSAGE);
 																										//validar que los campos tengan informacion
 				} else {
+					
+					String matriculaGenerada = sistemaAuth.registrarUsuarios(usuarioInput, passwordInput);
+					//guardamos usuario en SistemaBiblioteca para distintas funciones como prestamos
+					SistemaBiblioteca sistema = new SistemaBiblioteca();
+					Usuario nuevo = new Usuario(matriculaGenerada, nombreInput);
+					sistema.registrarUsuario(nuevo);								
 				
-				sistemaAuth.registrarUsuarios(usuarioInput, passwordInput);								//guardamos la contraseña
+					JOptionPane.showMessageDialog(InterfazLogin.this, "Usuario " + usuarioInput + " registrado con exito. "+ "\nTu matricula es: "+matriculaGenerada, "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 				
-				JOptionPane.showMessageDialog(InterfazLogin.this, "Usuario " + usuarioInput + " registrado con exito", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-				
-				textUsuario.setText("");																//limpiar la zona de escritura (Usuario)
-				contrasena.setText("");																	//limpiar la zona de escritura (Contraseña)
-				mainGrafico mainVentana = new mainGrafico();
-				mainVentana.setVisible(true);
+					textUsuario.setText("");																//limpiar la zona de escritura (Usuario)
+					contrasena.setText("");																	//limpiar la zona de escritura (Contraseña)
+					textNombre.setText("");
+					mainGrafico mainVentana = new mainGrafico(matriculaGenerada);
+					mainVentana.setVisible(true);
+					dispose();
 			}
 		}
 	});
@@ -149,15 +180,17 @@ public class InterfazLogin extends JFrame {
 					boolean exito = sistemaAuth.login(usuarioInpunt, passwordInput);
 					
 					if (exito) {
-						JOptionPane.showMessageDialog(InterfazLogin.this, "Bienvenido al Sistema Bibliotecario " + usuarioInpunt + ", login correcto");
+						String matricula = sistemaAuth.getMatriculaPorUsername(usuarioInpunt);
 						
+						JOptionPane.showMessageDialog(InterfazLogin.this,"Bienvenido alSistema Biblioteca "+ usuarioInpunt + "\nTu matricula es: "+matricula+ ",login correcto");
 						//agregar ventana de menu
 						/*VentanaMenu menu = new VentanaMenu();
 						 * menu.setVisible(true);
 						 * dispose();		para cerrar la ventana del login
 						 */
-						mainGrafico mainVentana = new mainGrafico();
+						mainGrafico mainVentana = new mainGrafico(matricula);
 						mainVentana.setVisible(true);
+						dispose();
 					}
 				} catch (LoginException error) {
 					JOptionPane.showMessageDialog(InterfazLogin.this, error.getMessage(), "Error de autenticación", JOptionPane.ERROR_MESSAGE);
@@ -188,13 +221,13 @@ public class InterfazLogin extends JFrame {
 		lblNewLabel_3 = new JLabel("Se necesita crear/tener un usuario para poder acceder a las funciones.");
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		lblNewLabel_3.setFont(new Font("Felix Titling", Font.PLAIN, 10));
-		lblNewLabel_3.setBounds(226, 151, 425, 23);
+		lblNewLabel_3.setBounds(226, 123, 425, 23);
 		contentPane.add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("NOTA:");
 		lblNewLabel_4.setForeground(new Color(255, 255, 255));
 		lblNewLabel_4.setFont(new Font("Felix Titling", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel_4.setBounds(180, 155, 48, 14);
+		lblNewLabel_4.setBounds(180, 127, 48, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		btnSalir = new JButton("Salir\r\n");
@@ -209,6 +242,13 @@ public class InterfazLogin extends JFrame {
 		btnSalir.setBackground(Color.WHITE);
 		btnSalir.setBounds(333, 503, 150, 38);
 		contentPane.add(btnSalir);
+		
+		
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setForeground(Color.WHITE);
+		lblNombre.setFont(new Font("Felix Titling", Font.BOLD, 20));
+		lblNombre.setBounds(226, 182, 100, 38);
+		contentPane.add(lblNombre);
 	}
 } 
-
+//vamos agenerar la matricula automaticamente y vamos a pedir el nombre aqui en el login

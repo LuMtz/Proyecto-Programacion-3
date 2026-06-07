@@ -13,9 +13,12 @@ public class Autenticacion {
 		this.listaUsuarios = new ArrayList<>();
 		cargarUsuarios();
 		//Si el archivo esta vacio, se crea un administrador por defecto
-		if (listaUsuarios.isEmpty()) {
-			crearUsuarioInicial(); 	
-		}
+		
+	}
+	//creamos la funcion que generara la matricula
+	private String generarMatricula() {
+		int siguiente = listaUsuarios.size() +1;
+		return String.format("LIB-%04d",siguiente);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -41,14 +44,23 @@ public class Autenticacion {
 		}
 	}
 	
-	private void crearUsuarioInicial () {
-		listaUsuarios.add(new UsuarioLogin ("administrador", "3412"));
+	
+	public String registrarUsuarios(String username, String password) {
+		String matricula = generarMatricula();
+		listaUsuarios.add(new UsuarioLogin (username, password, matricula));
 		guardarUsuarios();
+		return matricula;
 	}
 	
-	public void registrarUsuarios(String username, String password) {
-		listaUsuarios.add(new UsuarioLogin (username, password));
-		guardarUsuarios();
+	//creamos una funcion que retorne la matricula por el username
+	public String getMatriculaPorUsername(String username) {
+
+		for (UsuarioLogin u: listaUsuarios) {
+			if (u.getUsername().equals(username)) {
+					return u.getMatricula();
+			}
+		}
+		return null;
 	}
 	
 	public boolean login(String username, String password) throws LoginException{
@@ -67,4 +79,5 @@ public class Autenticacion {
 		}
 		throw new LoginException ("El usuario '" + username + "' no se encuentra registrado");
 	}
+	
 }

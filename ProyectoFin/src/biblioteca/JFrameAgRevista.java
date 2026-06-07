@@ -9,8 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -23,6 +25,7 @@ public class JFrameAgRevista extends JFrame {
 	private JTextField textTitulo;
 	private JTextField textEdicion;
 	private SistemaBiblioteca sistema;
+	private String matricula;
 	/**
 	 * Launch the application.
 	 */
@@ -30,7 +33,8 @@ public class JFrameAgRevista extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFrameAgRevista frame = new JFrameAgRevista();
+					JFrameAgRevista frame = new JFrameAgRevista("");
+					frame.setTitle("Agregar Revistas");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,12 +42,29 @@ public class JFrameAgRevista extends JFrame {
 			}
 		});
 	}
+	private void cambiarIcono() {
+		//me asuste,crei q iba a perder todo el progreso
+		//se iba a apagar por no tener pila
+		try {
+			URL urlIcono = getClass().getResource("chilly.jpg");
+			if (urlIcono != null) {
+				ImageIcon miIcono = new ImageIcon(urlIcono);
+				setIconImage(miIcono.getImage());
+			}else {
+				System.out.println("Error: No se encontro la imagen");
+			}
+		}catch(Exception e) {
+			System.out.println("Ocurri un error alcargar la imagen");
+		}
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public JFrameAgRevista() {
+	public JFrameAgRevista(String matricula) {
 		sistema = new SistemaBiblioteca();
+		this.matricula = matricula;
+		cambiarIcono();
 		getContentPane().setBackground(new Color(0,0, 64));
 		getContentPane().setLayout(null);
 		
@@ -74,7 +95,7 @@ public class JFrameAgRevista extends JFrame {
 		JButton btnNewButton = new JButton("Regresar A Menu Principal");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainGrafico mainVentana = new mainGrafico();
+				mainGrafico mainVentana = new mainGrafico(matricula);
 				mainVentana.setVisible(true);
 				dispose();
 			}

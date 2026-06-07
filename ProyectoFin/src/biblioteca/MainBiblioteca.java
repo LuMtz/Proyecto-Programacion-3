@@ -2,17 +2,17 @@ package biblioteca;
 
 import java.util.Scanner;
 
-import javax.security.auth.login.LoginException;
+//import javax.security.auth.login.LoginException;
 
 public class MainBiblioteca {
 	private static final Scanner scanner = new Scanner (System.in);
 	private static SistemaBiblioteca sistema;
-	private static Autenticacion autenticacion;
+	//private static Autenticacion autenticacion;
 	private static BackUpAutomatico backup;
 	private static Thread procesoSecundario;
 	/*
 	/*Controlamos el ciclio de incio de sesión. Si las credenciales no son correctas, no permite avanzar*/
-	private static void ejecutarLogin() {
+	/*private static void ejecutarLogin() {
 		boolean acceso = false;
 		while (!acceso) {
 			System.out.println("\n--------------------INICIO DE SESION--------------------");
@@ -35,7 +35,7 @@ public class MainBiblioteca {
 				}
 			}
 		}
-	}
+	}*/
 	
 	//desplegamos el menu interactivo
 	private static void ejecutarMenu() {
@@ -191,7 +191,7 @@ public class MainBiblioteca {
 	public static void main(String[] args) {
 		//Inicializar el sistema
 		sistema = new SistemaBiblioteca();
-		autenticacion = new Autenticacion();
+		//autenticacion = new Autenticacion();
 		
 		System.out.println("SISTEMA DE GESTION DE BIBLIOTECA");
 		//ejecutarLogin();
